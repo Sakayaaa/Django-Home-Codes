@@ -1,26 +1,22 @@
 from django.shortcuts import render, redirect
 from .models import Teacher, Student, Grade
-from .forms import CreateTeacherForm, CreateStudentForm, CreateGradeForm
+from .forms import CreateTeacherForm, CreateStudentForm, CreateGradeForm, UpdateTeacherForm
 
 
 def home(request):
     return render(request, 'school/home.html')
-
-
+#------------------------------------------------------------------------------------------------------------------
 def teacher(request, id):
     t = Teacher.objects.get(id=id)
     return render(request, 'school/teacher.html', {'t': t})
-
 
 def teachers_list(request):
     teachers = Teacher.objects.all()
     return render(request, 'school/teachers_list.html', {'teachers': teachers})
 
-
 def delete_teacher(request, id):
     Teacher.objects.get(id=id).delete()
     return redirect('teachers_list')
-
 
 def create_teacher(request):
     if request.method == "POST":
@@ -35,21 +31,27 @@ def create_teacher(request):
         form = CreateTeacherForm()
         return render(request, 'school/create_teacher.html', {'form': form})
 
-
+def update_teacher(request, pk):
+    t = Teacher.objects.get(pk=pk)
+    if request.method == "POST":
+        form = UpdateTeacherForm(request.POST, instance=t)
+        if form.is_valid():
+            form.save()
+            return redirect('teachers_list')
+    form = UpdateTeacherForm(instance=t)
+    return render(request, 'school/update_teacher.html', {'form':form})
+#------------------------------------------------------------------------------------------------------------------
 def student(request, id):
     s = Student.objects.get(id=id)
     return render(request, 'school/student.html', {'s': s})
-
 
 def students_list(request):
     students = Student.objects.all()
     return render(request, 'school/students_list.html', {'students': students})
 
-
 def delete_student(request, id):
     Student.objects.get(id=id).delete()
     return redirect('students_list')
-
 
 def create_student(request):
     if request.method == "POST":
@@ -67,22 +69,18 @@ def create_student(request):
         
     form = CreateStudentForm()
     return render(request, 'school/create_student.html', {'form': form})
-
-
+#------------------------------------------------------------------------------------------------------------------
 def grade(request, id):
     g = Grade.objects.get(id=id)
     return render(request, 'school/grade.html', {'g': g})
-
 
 def grades_list(request):
     grades = Grade.objects.all()
     return render(request, 'school/grades_list.html', {'grades': grades})
 
-
 def delete_grade(request, id):
     Grade.objects.get(id=id).delete()
     return redirect('grades_list')
-
 
 def create_grade(request):
     if request.method == "POST":

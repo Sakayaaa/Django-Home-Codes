@@ -13,7 +13,7 @@
       window.location.href = "{% url 'delete_teacher' t.id %}"
     }
   </script>
-<a href="" class="btn btn-info">Update</a>
+<a href="{% url "update_teacher" t.id %}" class="btn btn-info">Update</a>
 <h2>ID: {{ t.id }}</h2>
 <h2>Name: {{ t.name }}</h2>
 <h2>Subject: {{ t.subject }}</h2>
