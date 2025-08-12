@@ -100,3 +100,7 @@ def create_grade(request):
         form = CreateGradeForm()
         return render(request, 'school/create_grade.html', {'form': form})
 
+
+
+def test():
+    pass
