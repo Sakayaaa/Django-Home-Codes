@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+{{ t.name }}
+{% endblock title %}
+
+{% block content %}
+<a href="{% url 'teachers_list' %}" class="btn btn-success">Go Back</a>
+<a onclick=confirmDelete() class="btn btn-danger">Delete</a>
+  <script>
+    function confirmDelete(){
+      var r = confirm('You are deleting this record...')
+      if (r==true)
+      window.location.href = "{% url 'delete_teacher' t.id %}"
+    }
+  </script>
+<a href="" class="btn btn-info">Update</a>
+<h2>ID: {{ t.id }}</h2>
+<h2>Name: {{ t.name }}</h2>
+<h2>Subject: {{ t.subject }}</h2>
+{% endblock content %}
+
+{% block bgcolor %}
+gray
+{% endblock bgcolor %}

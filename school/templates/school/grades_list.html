@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Grades List
+{% endblock %}
+
+{% block content %}
+  <a href="{% url 'create_grade' %}" class="btn btn-info">Create</a>
+  <br><br>
+  {% for grade in grades|dictsortreversed:"id"%}
+    <a href="{% url 'grade' grade.id %}"><h2>{{ grade.student.name }} {{ grade.student.family }} - {{ grade.student.teacher.subject }}</h2></a>
+    <hr/>
+    
+  {% endfor %}
+{% endblock %}
+
+{% block bgcolor %}
+  lightgreen
+{% endblock %}
