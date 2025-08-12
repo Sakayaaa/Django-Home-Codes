@@ -14,8 +14,7 @@ from .models import Teacher, Student, Grade
 # class CreateGradeForm(forms.Form):
 #     student = forms.ModelChoiceField(queryset=Student.objects.all())
 #     score = forms.DecimalField(label='score:')
-
-
+#------------------------------------------------------------------------------------------------------------------
 class CreateTeacherForm(forms.ModelForm):
     class Meta():
         model = Teacher
@@ -25,14 +24,23 @@ class UpdateTeacherForm(forms.ModelForm):
     class Meta():
         model = Teacher
         fields = ['name', 'subject']
-
-
+#------------------------------------------------------------------------------------------------------------------
 class CreateStudentForm(forms.ModelForm):
     class Meta():
         model = Student
         fields = ['name', 'family', 'age', 'teacher']
-
+        
+class UpdateStudentForm(forms.ModelForm):
+    class Meta():
+        model = Student
+        fields = ['name', 'family', 'age', 'teacher']
+#------------------------------------------------------------------------------------------------------------------
 class CreateGradeForm(forms.ModelForm):
+    class Meta():
+        model = Grade
+        fields = ['student', 'score']
+   
+class UpdateGradeForm(forms.ModelForm):
     class Meta():
         model = Grade
         fields = ['student', 'score']

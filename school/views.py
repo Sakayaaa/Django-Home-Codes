@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Teacher, Student, Grade
-from .forms import CreateTeacherForm, CreateStudentForm, CreateGradeForm, UpdateTeacherForm
+from .forms import CreateTeacherForm, CreateStudentForm, CreateGradeForm, UpdateTeacherForm, UpdateStudentForm, UpdateGradeForm
 
 
 def home(request):
@@ -69,6 +69,16 @@ def create_student(request):
         
     form = CreateStudentForm()
     return render(request, 'school/create_student.html', {'form': form})
+
+def update_student(request, id):
+    s = Student.objects.get(id=id)
+    if request.method == "POST":
+        form = UpdateStudentForm(request.POST, instance=s)
+        if form.is_valid():
+            form.save()
+            return redirect('students_list')
+    form = UpdateStudentForm(instance=s)
+    return render(request, 'school/update_student.html', {'form':form})
 #------------------------------------------------------------------------------------------------------------------
 def grade(request, id):
     g = Grade.objects.get(id=id)
@@ -98,4 +108,12 @@ def create_grade(request):
         form = CreateGradeForm()
         return render(request, 'school/create_grade.html', {'form': form})
 
-
+def update_grade(request, id):
+    g = Grade.objects.get(id=id)
+    if request.method == "POST":
+        form = UpdateGradeForm(request.POST, instance=g)
+        if form.is_valid():
+            form.save()
+            return redirect('grades_list')
+    form = UpdateGradeForm(instance=g)
+    return render(request, 'school/update_grade.html', {'form':form})

@@ -14,9 +14,11 @@ urlpatterns = [
     path('student/<int:id>', views.student, name='student'),
     path('delete_student/<int:id>', views.delete_student, name='delete_student'),
     path('create_student/', views.create_student, name='create_student'),
+    path('update_student/<int:id>', views.update_student, name='update_student'),
     
     path('grades_list/', views.grades_list, name='grades_list'),
     path('grade/<int:id>', views.grade, name='grade'),
     path('delete_grade/<int:id>', views.delete_grade, name='delete_grade'),
     path('create_grade/', views.create_grade, name='create_grade'),
+    path('update_grade/<int:id>', views.update_grade, name='update_grade'),
 ]
